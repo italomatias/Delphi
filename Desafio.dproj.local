@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<BorlandProject>
+	<Transactions>
+    <Transaction>2020/03/08 16:28:46.000.682,=C:\Users\Mestre Italo\Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>2020/03/08 16:49:46.000.242,=C:\Users\Mestre Italo\Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>2020/03/08 16:53:04.586,=C:\Users\Mestre Italo\Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>2020/03/08 16:57:02.175,C:\Users\Mestre Italo\Desktop\Desafio Otimizy - Italo Reis\Principal.pas=C:\Users\Mestre Italo\Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>2020/03/08 16:57:02.175,C:\Users\Mestre Italo\Desktop\Desafio Otimizy - Italo Reis\Principal.dfm=C:\Users\Mestre Italo\Documents\Embarcadero\Studio\Projects\Unit1.dfm</Transaction>
+    <Transaction>2020/03/08 16:57:11.899,C:\Users\Mestre Italo\Desktop\Desafio Otimizy - Italo Reis\Desafio.dproj=C:\Users\Mestre Italo\Documents\Embarcadero\Studio\Projects\Project1.dproj</Transaction>
+    <Transaction>2020/03/08 16:57:44.129,=C:\Users\Mestre Italo\Desktop\Desafio Otimizy - Italo Reis\Unit1.pas</Transaction>
+    <Transaction>2020/03/08 16:57:59.973,=C:\Users\Mestre Italo\Desktop\Desafio Otimizy - Italo Reis\Unit2.pas</Transaction>
+    <Transaction>2020/03/08 16:58:13.503,=C:\Users\Mestre Italo\Desktop\Desafio Otimizy - Italo Reis\Unit2.pas</Transaction>
+    <Transaction>2020/03/08 16:58:41.300,C:\Users\Mestre Italo\Desktop\Desafio Otimizy - Italo Reis\Cad_Padrao.pas=C:\Users\Mestre Italo\Desktop\Desafio Otimizy - Italo Reis\Unit2.pas</Transaction>
+    <Transaction>2020/03/08 16:58:41.300,C:\Users\Mestre Italo\Desktop\Desafio Otimizy - Italo Reis\Cad_Padrao.dfm=C:\Users\Mestre Italo\Desktop\Desafio Otimizy - Italo Reis\Unit2.dfm</Transaction>
+  </Transactions>
+</BorlandProject>

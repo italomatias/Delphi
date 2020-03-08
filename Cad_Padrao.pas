@@ -49,9 +49,9 @@ type
     procedure FormCreate(Sender: TObject);
   private
     { Private declarations }
-    Procedure Importa_Resgistros;
   public
     { Public declarations }
+    Procedure Importa_Resgistros(Tabela : String);
   end;
 
 var
@@ -63,16 +63,16 @@ implementation
 
 procedure TFrmCadPadrao.FormCreate(Sender: TObject);
 begin
-  Importa_Resgistros;
+  Importa_Resgistros('planets');
 end;
 
-procedure TFrmCadPadrao.Importa_Resgistros;
+procedure TFrmCadPadrao.Importa_Resgistros(Tabela : String);
 var
   N_Regs, I : integer ;
   Temp   : String;
 begin
     // Infome Link para Buscar Número de Registro
-    RestClientPadrao.BaseURL :=  'https://swapi.co/api/planets';
+    RestClientPadrao.BaseURL :=  'https://swapi.co/api/'+tabela;
     RestRequestPadrao.execute;
 
     // Nunca mexi com este componente antes, mas consegui fazer o requisitado KKKKKK
@@ -86,7 +86,7 @@ begin
       With qrypadrao do
       begin
         Close;
-        Sql.Add('SELECT * FROM PLANETS');
+        Sql.Add('SELECT * FROM '+tabela);
         Open;
       end;
 
@@ -98,6 +98,8 @@ begin
            RestRequestPadrao.execute;
            cdsRest.Close;
            CdsRest.Open;
+
+           // Terminar cadastro Server Caiu na Hora do teste de importação
          end;
       end;
 

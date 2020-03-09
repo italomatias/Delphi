@@ -19,6 +19,7 @@ object FrmCadPadrao: TFrmCadPadrao
     Top = 8
     Width = 753
     Height = 502
+    DataSource = dtspadrao
     TabOrder = 0
     TitleFont.Charset = DEFAULT_CHARSET
     TitleFont.Color = clWindowText
@@ -59,21 +60,11 @@ object FrmCadPadrao: TFrmCadPadrao
       '')
     Left = 803
     Top = 80
-    object qrypadraoID: TIntegerField
-      FieldName = 'ID'
-      Origin = 'ID'
-      ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
-      Required = True
-    end
-    object qrypadraoTEXTO: TStringField
-      DisplayWidth = 500
-      FieldName = 'TEXTO'
-      Origin = 'TEXTO'
-    end
   end
   object cdspadrao: TClientDataSet
     Aggregates = <>
     Params = <>
+    ProviderName = 'dsppadrao'
     Left = 800
     Top = 136
   end
@@ -101,81 +92,10 @@ object FrmCadPadrao: TFrmCadPadrao
     FieldDefs = <>
     IndexDefs = <>
     Params = <>
+    ProviderName = 'dsppadrao'
     StoreDefs = True
     Left = 896
     Top = 240
-    object cdsRestcount: TWideStringField
-      FieldName = 'count'
-      Size = 255
-    end
-    object cdsRestnext: TWideStringField
-      FieldName = 'next'
-      Size = 255
-    end
-    object cdsRestprevious: TWideStringField
-      FieldName = 'previous'
-      Size = 255
-    end
-    object cdsRestresults: TWideStringField
-      FieldName = 'results'
-      Size = 255
-    end
-    object cdsRestname: TWideStringField
-      FieldName = 'name'
-      Size = 255
-    end
-    object cdsRestrotation_period: TWideStringField
-      FieldName = 'rotation_period'
-      Size = 255
-    end
-    object cdsRestorbital_period: TWideStringField
-      FieldName = 'orbital_period'
-      Size = 255
-    end
-    object cdsRestdiameter: TWideStringField
-      FieldName = 'diameter'
-      Size = 255
-    end
-    object cdsRestclimate: TWideStringField
-      FieldName = 'climate'
-      Size = 255
-    end
-    object cdsRestgravity: TWideStringField
-      FieldName = 'gravity'
-      Size = 255
-    end
-    object cdsRestterrain: TWideStringField
-      FieldName = 'terrain'
-      Size = 255
-    end
-    object cdsRestsurface_water: TWideStringField
-      FieldName = 'surface_water'
-      Size = 255
-    end
-    object cdsRestpopulation: TWideStringField
-      FieldName = 'population'
-      Size = 255
-    end
-    object cdsRestresidents: TWideStringField
-      FieldName = 'residents'
-      Size = 255
-    end
-    object cdsRestfilms: TWideStringField
-      FieldName = 'films'
-      Size = 255
-    end
-    object cdsRestcreated: TWideStringField
-      FieldName = 'created'
-      Size = 255
-    end
-    object cdsRestedited: TWideStringField
-      FieldName = 'edited'
-      Size = 255
-    end
-    object cdsResturl: TWideStringField
-      FieldName = 'url'
-      Size = 255
-    end
   end
   object RestDataSet: TRESTResponseDataSetAdapter
     Dataset = cdsRest

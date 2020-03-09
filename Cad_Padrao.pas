@@ -11,15 +11,13 @@ uses
   FireDAC.DApt.Intf, FireDAC.DApt, Data.DB, Vcl.Grids, Vcl.DBGrids,
   FireDAC.Comp.DataSet, FireDAC.Comp.Client, Datasnap.DBClient, Vcl.ExtCtrls,
   Vcl.DBCtrls, REST.Types, REST.Response.Adapter, REST.Client,
-  Data.Bind.Components, Data.Bind.ObjectScope ;
+  Data.Bind.Components, Data.Bind.ObjectScope, Datasnap.Provider ;
 
 type
   TFrmCadPadrao = class(TForm)
     Conection_Firebird: TFDConnection;
     dtspadrao: TDataSource;
     qrypadrao: TFDQuery;
-    qrypadraoID: TIntegerField;
-    qrypadraoTEXTO: TStringField;
     dbgpadrao: TDBGrid;
     dbnPadrao: TDBNavigator;
     cdspadrao: TClientDataSet;
@@ -27,24 +25,6 @@ type
     RestRequestPadrao: TRESTRequest;
     RestClientPadrao: TRESTClient;
     cdsRest: TClientDataSet;
-    cdsRestcount: TWideStringField;
-    cdsRestnext: TWideStringField;
-    cdsRestprevious: TWideStringField;
-    cdsRestresults: TWideStringField;
-    cdsRestname: TWideStringField;
-    cdsRestrotation_period: TWideStringField;
-    cdsRestorbital_period: TWideStringField;
-    cdsRestdiameter: TWideStringField;
-    cdsRestclimate: TWideStringField;
-    cdsRestgravity: TWideStringField;
-    cdsRestterrain: TWideStringField;
-    cdsRestsurface_water: TWideStringField;
-    cdsRestpopulation: TWideStringField;
-    cdsRestresidents: TWideStringField;
-    cdsRestfilms: TWideStringField;
-    cdsRestcreated: TWideStringField;
-    cdsRestedited: TWideStringField;
-    cdsResturl: TWideStringField;
     RestDataSet: TRESTResponseDataSetAdapter;
     procedure FormCreate(Sender: TObject);
   private
@@ -64,6 +44,7 @@ implementation
 procedure TFrmCadPadrao.FormCreate(Sender: TObject);
 begin
   Importa_Resgistros('planets');
+  Importa_Resgistros('people');
 end;
 
 procedure TFrmCadPadrao.Importa_Resgistros(Tabela : String);
@@ -72,7 +53,7 @@ var
   Temp   : String;
 begin
     // Infome Link para Buscar Número de Registro
-    RestClientPadrao.BaseURL :=  'https://swapi.co/api/'+tabela;
+    RestClientPadrao.BaseURL :=  'https://swapi.co/api/'+tabela+'/';
     RestRequestPadrao.execute;
 
     // Nunca mexi com este componente antes, mas consegui fazer o requisitado KKKKKK
@@ -86,6 +67,7 @@ begin
       With qrypadrao do
       begin
         Close;
+        sql.Clear;
         Sql.Add('SELECT * FROM '+tabela);
         Open;
       end;
@@ -94,12 +76,70 @@ begin
       begin
          for I:=1 to N_Regs do
          begin
-           RestClientPadrao.BaseURL :=  'https://swapi.co/api/planets/'+inttostr(I);
-           RestRequestPadrao.execute;
-           cdsRest.Close;
-           CdsRest.Open;
 
-           // Terminar cadastro Server Caiu na Hora do teste de importação
+           if ((I <> 17) AND (Tabela <> 'Peolpe'))  then // Request https://swapi.co/api/people/17/ Não existe no WebService
+           begin
+             RestClientPadrao.BaseURL :=  'https://swapi.co/api/'+Tabela+'/'+inttostr(I)+'/';
+             RestRequestPadrao.execute;
+           end;
+
+           if ((I <> 17) AND (Tabela = 'people')) then
+           begin
+
+             qrypadrao.Close;
+             qrypadrao.SQL.Clear;
+
+             qrypadrao.Sql.Add('INSERT INTO PEOPLE ( ID , NAME , HEIGHT , MASS , HAIR_COLOR , SKIN_COLOR , EYE_COLOR , BIRTH_YEAR , GENDER ) ');
+             qrypadrao.SQL.Add('VALUES ( ' + INTTOSTR(I) );
+             qrypadrao.Sql.Add(' ,  '      + quotedstr(cdsrest.FieldByName('name').Value));
+             qrypadrao.Sql.Add(' ,  '      + quotedstr(cdsrest.FieldByName('height').Value));
+             qrypadrao.Sql.Add(' ,  '      + quotedstr(cdsrest.FieldByName('mass').Value));
+             qrypadrao.Sql.Add(' ,  '      + quotedstr(cdsrest.FieldByName('hair_color').Value));
+             qrypadrao.Sql.Add(' ,  '      + quotedstr(cdsrest.FieldByName('skin_color').Value));
+             qrypadrao.Sql.Add(' ,  '      + quotedstr(cdsrest.FieldByName('eye_color').Value));
+             qrypadrao.Sql.Add(' ,  '      + quotedstr(cdsrest.FieldByName('birth_year').Value));
+             qrypadrao.Sql.Add(' ,  '      + quotedstr(cdsrest.FieldByName('gender').Value));
+             qrypadrao.Sql.Add(' )  ' );
+             qrypadrao.ExecSQL;
+
+           end;
+
+           if Tabela = 'planets' then
+           begin
+
+             qrypadrao.Close;
+             qrypadrao.SQL.Clear;
+
+             qrypadrao.Sql.Add('INSERT INTO PLANETS ( ID , NAME , ROTATION_PERIOD , ORBITAL_PERIOD , DIAMETER , CLIMATE , GRAVITY , TERRAIN , SURFACE_WATER , POPOLATION ) ');
+             qrypadrao.SQL.Add('VALUES ( ' + INTTOSTR(I) );
+             qrypadrao.Sql.Add(' ,  '      + quotedstr(cdsrest.FieldByName('name').Value));
+             qrypadrao.Sql.Add(' ,  '      + quotedstr(cdsrest.FieldByName('rotation_period').Value));
+             qrypadrao.Sql.Add(' ,  '      + quotedstr(cdsrest.FieldByName('orbital_period').Value));
+             qrypadrao.Sql.Add(' ,  '      + quotedstr(cdsrest.FieldByName('diameter').Value));
+             qrypadrao.Sql.Add(' ,  '      + quotedstr(cdsrest.FieldByName('climate').Value));
+             qrypadrao.Sql.Add(' ,  '      + quotedstr(cdsrest.FieldByName('gravity').Value));
+             qrypadrao.Sql.Add(' ,  '      + quotedstr(cdsrest.FieldByName('terrain').Value));
+             qrypadrao.Sql.Add(' ,  '      + quotedstr(cdsrest.FieldByName('surface_water').Value));
+             qrypadrao.Sql.Add(' ,  '      + quotedstr(cdsrest.FieldByName('population').Value));
+             qrypadrao.Sql.Add(' )  ' );
+             qrypadrao.ExecSQL;
+
+             { Verificar o motivo de o param nao funcionar
+             qrypadrao.Sql.Add('INSERT INTO PLANETS VALUES ( :P_ID , :P_NAME , :P_ROTATION_PERIOD , :P_ORBITALPERIOD , :P_DIAMETER , :P_CLIMATE , :P_GRAVITY , ');
+             qrypadrao.Sql.Add('                             :P_TERRAIN  , :P_SURFACE_WATER , :P_POPOLATION ');
+
+             qrypadrao.ParamByName('P_ID').Value              := I;
+             qrypadrao.ParamByName('P_NAME').Value            := cdsrest.FieldByName('name').Value;
+             qrypadrao.ParamByName('P_ROTATION_PERIOD').Value := cdsrest.FieldByName('rotation_period').Value;
+             qrypadrao.ParamByName('P_ORBITALPERIOD').Value   := cdsrest.FieldByName('orbital_period').Value;
+             qrypadrao.ParamByName('P_DIAMETER').Value        := cdsrest.FieldByName('diameter').Value;
+             qrypadrao.ParamByName('P_CLIMATE').Value         := cdsrest.FieldByName('climate').Value;
+             qrypadrao.ParamByName('P_GRAVITY').Value         := cdsrest.FieldByName('gravity').Value;
+             qrypadrao.ParamByName('P_TERRAIN').Value         := cdsrest.FieldByName('terrain').Value;
+             qrypadrao.ParamByName('P_SURFACE_WATER').Value   := cdsrest.FieldByName('surface_water').Value;
+             qrypadrao.ParamByName('P_POPOLATION').Value      := cdsrest.FieldByName('population').Value;
+             qrypadrao.Open;}
+           end;
          end;
       end;
 

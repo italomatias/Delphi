@@ -4,7 +4,7 @@ object FrmCadPadrao: TFrmCadPadrao
   BorderIcons = [biSystemMenu, biMinimize]
   Caption = 'FrmCadPadrao'
   ClientHeight = 575
-  ClientWidth = 1006
+  ClientWidth = 880
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -15,14 +15,14 @@ object FrmCadPadrao: TFrmCadPadrao
   Position = poDesigned
   OnCreate = FormCreate
   DesignSize = (
-    1006
+    880
     575)
   PixelsPerInch = 96
   TextHeight = 13
   object dbgpadrao: TDBGrid
     Left = -5
     Top = 0
-    Width = 1003
+    Width = 877
     Height = 491
     Anchors = [akLeft, akTop, akRight, akBottom]
     DataSource = dtspadrao
@@ -36,26 +36,24 @@ object FrmCadPadrao: TFrmCadPadrao
   object dbnPadrao: TDBNavigator
     Left = 0
     Top = 531
-    Width = 1006
+    Width = 880
     Height = 44
     DataSource = dtspadrao
     VisibleButtons = [nbFirst, nbPrior, nbNext, nbLast, nbInsert, nbDelete, nbEdit, nbPost, nbCancel, nbRefresh, nbApplyUpdates]
     Align = alBottom
     TabOrder = 1
-    ExplicitLeft = -6
-    ExplicitTop = 528
-    ExplicitWidth = 1207
+    ExplicitWidth = 1006
   end
   object pgbpadrao: TProgressBar
     Left = 192
     Top = 501
-    Width = 806
+    Width = 680
     Height = 17
     Align = alCustom
     Anchors = [akLeft, akTop, akRight, akBottom]
     Max = 50
     TabOrder = 2
-    ExplicitWidth = 1198
+    ExplicitWidth = 806
   end
   object btnImportar: TButton
     Left = 8
@@ -68,54 +66,53 @@ object FrmCadPadrao: TFrmCadPadrao
   end
   object Conection_Firebird: TFDConnection
     Params.Strings = (
-      
-        'Database=C:\Users\Mestre Italo\Desktop\BASE STAR WARS\STARWARS.F' +
-        'DB'
+      'Database=C:\Users\ireis\Desktop\BASE STAR WARS\STARWARS.FDB'
       'User_Name=SYSDBA'
       'Password=masterkey'
       'Server=127.0.0.1'
       'Protocol=TCPIP'
       'DriverID=FB')
-    Left = 1267
-    Top = 8
+    Left = 656
+    Top = 32
   end
   object dtspadrao: TDataSource
-    DataSet = qrypadrao
-    Left = 1355
-    Top = 8
+    DataSet = cdspadrao
+    Left = 771
+    Top = 32
   end
   object qrypadrao: TFDQuery
     Connection = Conection_Firebird
     SQL.Strings = (
       '')
-    Left = 1299
-    Top = 8
+    Left = 685
+    Top = 32
   end
   object cdspadrao: TClientDataSet
     Aggregates = <>
+    FetchOnDemand = False
     Params = <>
     ProviderName = 'dsppadrao'
-    Left = 1328
-    Top = 8
+    Left = 744
+    Top = 32
   end
   object RestResponsePadrao: TRESTResponse
-    Left = 1300
-    Top = 40
+    Left = 716
+    Top = 64
   end
   object RestRequestPadrao: TRESTRequest
     Client = RestClientPadrao
     Params = <>
     Response = RestResponsePadrao
     SynchronizedEvents = False
-    Left = 1269
-    Top = 40
+    Left = 685
+    Top = 64
   end
   object RestClientPadrao: TRESTClient
     Accept = 'application/json, text/plain; q=0.9, text/html;q=0.8,'
     AcceptCharset = 'utf-8, *;q=0.8'
     Params = <>
-    Left = 1330
-    Top = 40
+    Left = 746
+    Top = 64
   end
   object cdsRest: TClientDataSet
     Aggregates = <>
@@ -124,14 +121,19 @@ object FrmCadPadrao: TFrmCadPadrao
     Params = <>
     ProviderName = 'dsppadrao'
     StoreDefs = True
-    Left = 1240
-    Top = 40
+    Left = 656
+    Top = 64
   end
   object RestDataSet: TRESTResponseDataSetAdapter
     Dataset = cdsRest
     FieldDefs = <>
     Response = RestResponsePadrao
-    Left = 1360
-    Top = 40
+    Left = 776
+    Top = 64
+  end
+  object dspPadrao: TDataSetProvider
+    DataSet = qrypadrao
+    Left = 715
+    Top = 32
   end
 end

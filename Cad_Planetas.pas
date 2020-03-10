@@ -12,7 +12,7 @@ uses
   REST.Response.Adapter, REST.Client, Data.Bind.Components,
   Data.Bind.ObjectScope, Datasnap.DBClient, FireDAC.Comp.DataSet,
   FireDAC.Comp.Client, Vcl.StdCtrls, Vcl.ComCtrls, Vcl.ExtCtrls, Vcl.DBCtrls,
-  Vcl.Grids, Vcl.DBGrids, System.UITypes ;
+  Vcl.Grids, Vcl.DBGrids, System.UITypes, Datasnap.Provider ;
 
 type
   TFrmImportaPlanetas = class(TFrmCadPadrao)

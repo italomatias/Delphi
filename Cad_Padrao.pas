@@ -29,6 +29,7 @@ type
     RestDataSet: TRESTResponseDataSetAdapter;
     pgbpadrao: TProgressBar;
     btnImportar: TButton;
+    dspPadrao: TDataSetProvider;
     procedure FormCreate(Sender: TObject);
   private
     { Private declarations }
@@ -56,6 +57,8 @@ begin
       Sql.Add('SELECT * FROM '+tabela);
       Open;
     end;
+      cdspadrao.Close;
+      cdspadrao.Open;
   except on E: EDatabaseError do
       MessageDlg('Erro ao Pesquisar dados da base', mtError,  [mbOk], 0);
   end;
@@ -159,7 +162,7 @@ begin
          Exiberegistros(tabela);
       end
       else
-      begin 
+      begin
         // Já existe dados na tabela, poderia fazer uma função que atualiza apenas os que não tem mas falta tempo KKKKK
         MessageDlg('Não é necessário importar dados para a tabela,Pois a tabela já contém registros.', mtInformation,  [mbOk], 0);
       end;

@@ -13,7 +13,5 @@ begin
   Application.Initialize;
   Application.MainFormOnTaskbar := True;
   Application.CreateForm(TFrmPrincipal, FrmPrincipal);
-  Application.CreateForm(TFrmImportaPlanetas, FrmImportaPlanetas);
-  Application.CreateForm(TFrmImportaPessoas, FrmImportaPessoas);
   Application.Run;
 end.

@@ -13,6 +13,7 @@ uses
 
 type
   TFrmPrincipal = class(TForm)
+    GroupBox1: TGroupBox;
     Btn_Importar_Editar_Planetas: TButton;
     Button1: TButton;
     procedure Btn_Importar_Editar_PlanetasClick(Sender: TObject);

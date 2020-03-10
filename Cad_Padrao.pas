@@ -11,7 +11,8 @@ uses
   FireDAC.DApt.Intf, FireDAC.DApt, Data.DB, Vcl.Grids, Vcl.DBGrids,
   FireDAC.Comp.DataSet, FireDAC.Comp.Client, Datasnap.DBClient, Vcl.ExtCtrls,
   Vcl.DBCtrls, REST.Types, REST.Response.Adapter, REST.Client,
-  Data.Bind.Components, Data.Bind.ObjectScope, Datasnap.Provider ;
+  Data.Bind.Components, Data.Bind.ObjectScope, Datasnap.Provider, Vcl.StdCtrls,
+  Vcl.ComCtrls, System.UITypes ;
 
 type
   TFrmCadPadrao = class(TForm)
@@ -26,12 +27,15 @@ type
     RestClientPadrao: TRESTClient;
     cdsRest: TClientDataSet;
     RestDataSet: TRESTResponseDataSetAdapter;
+    pgbpadrao: TProgressBar;
+    btnImportar: TButton;
     procedure FormCreate(Sender: TObject);
   private
     { Private declarations }
   public
     { Public declarations }
     Procedure Importa_Resgistros(Tabela : String);
+    Procedure Exiberegistros(Tabela : String);
   end;
 
 var
@@ -41,10 +45,26 @@ implementation
 
 {$R *.dfm}
 
+procedure TFrmCadPadrao.Exiberegistros(Tabela: String);
+begin
+  // Esta função busca os dados da tabela informada por param.
+  Try
+    With qrypadrao do
+    begin
+      Close;
+      Sql.Clear;
+      Sql.Add('SELECT * FROM '+tabela);
+      Open;
+    end;
+  except on E: EDatabaseError do
+      MessageDlg('Erro ao Pesquisar dados da base', mtError,  [mbOk], 0);
+  end;
+end;
+
 procedure TFrmCadPadrao.FormCreate(Sender: TObject);
 begin
-  Importa_Resgistros('planets');
-  Importa_Resgistros('people');
+  // Zera a barra de progresso ao abrir a tela.
+  pgbpadrao.Position := 0;    
 end;
 
 procedure TFrmCadPadrao.Importa_Resgistros(Tabela : String);
@@ -52,31 +72,24 @@ var
   N_Regs, I : integer ;
   Temp   : String;
 begin
-    // Infome Link para Buscar Número de Registro
-    RestClientPadrao.BaseURL :=  'https://swapi.co/api/'+tabela+'/';
-    RestRequestPadrao.execute;
-
-    // Nunca mexi com este componente antes, mas consegui fazer o requisitado KKKKKK
-    // Aqui ele pega a resposta do request e pega o número de registros é um pouco feio mas funciona KKKK
-    Temp    := RestResponsePadrao.Content;
-    N_Regs  := StrToInt(COPY( Temp , POS(':', Temp ) + 1  , (POS(',', Temp ) -  POS(':', Temp ) - 1  )));
-
     // Apenas importa se a Tabela está vazia
-
     Try
-      With qrypadrao do
-      begin
-        Close;
-        sql.Clear;
-        Sql.Add('SELECT * FROM '+tabela);
-        Open;
-      end;
+      Exiberegistros(tabela);
 
       if qrypadrao.RecordCount = 0  then
       begin
+         // Infome Link para Buscar Número de Registro
+        RestClientPadrao.BaseURL :=  'https://swapi.co/api/'+tabela+'/';
+        RestRequestPadrao.execute;
+
+        // Nunca mexi com este componente antes, mas consegui fazer o requisitado KKKKKK
+        // Aqui ele pega a resposta do request e pega o número de registros é um pouco feio mas funciona KKKK
+        Temp    := RestResponsePadrao.Content;
+        N_Regs  := StrToInt(COPY( Temp , POS(':', Temp ) + 1  , (POS(',', Temp ) -  POS(':', Temp ) - 1  )));
+        
          for I:=1 to N_Regs do
          begin
-
+           pgbpadrao.Position := pgbpadrao.Position +1;
            if ((I <> 17) AND (Tabela <> 'Peolpe'))  then // Request https://swapi.co/api/people/17/ Não existe no WebService
            begin
              RestClientPadrao.BaseURL :=  'https://swapi.co/api/'+Tabela+'/'+inttostr(I)+'/';
@@ -141,13 +154,20 @@ begin
              qrypadrao.Open;}
            end;
          end;
+         // Tudo OK Exibe registros Importados.
+         MessageDlg('Registros importados com sucesso.', mtInformation,  [mbOk], 0);
+         Exiberegistros(tabela);
+      end
+      else
+      begin 
+        // Já existe dados na tabela, poderia fazer uma função que atualiza apenas os que não tem mas falta tempo KKKKK
+        MessageDlg('Não é necessário importar dados para a tabela,Pois a tabela já contém registros.', mtInformation,  [mbOk], 0);
       end;
 
-
     except on E: EDatabaseError do
+      // Deu algum problema no SQL :( 
       MessageDlg('Erro ao Pesquisar dados da base', mtError,  [mbOk], 0);
     end;
-
 
 end;
 

@@ -13,7 +13,9 @@ uses
 
 type
   TFrmPrincipal = class(TForm)
+    Btn_Importar_Editar_Planetas: TButton;
     Button1: TButton;
+    procedure Btn_Importar_Editar_PlanetasClick(Sender: TObject);
     procedure Button1Click(Sender: TObject);
   private
     { Private declarations }
@@ -26,16 +28,26 @@ var
 
 implementation
 
-Uses Cad_Padrao ;
+Uses Cad_Planetas , Cad_Pessoas ;
 
 {$R *.dfm}
 
+procedure TFrmPrincipal.Btn_Importar_Editar_PlanetasClick(Sender: TObject);
+var
+  frm : TFrmImportaPlanetas;
+begin
+  frm :=   TFrmImportaPlanetas.Create(Self);
+  frm.ShowModal;
+  frm.Free;
+end;
+
 procedure TFrmPrincipal.Button1Click(Sender: TObject);
 var
-  frm : TFrmCadPadrao;
+  frm : TFrmImportaPessoas;
 begin
-  frm :=   TFrmCadPadrao.Create(Self);
-  Frm.ShowModal;
+  frm :=   TFrmImportaPessoas.Create(Self);
+  frm.ShowModal;
+  frm.Free;
 end;
 
 end.

@@ -22,21 +22,39 @@ object FrmPrincipal: TFrmPrincipal
     TabOrder = 0
     object Btn_Importar_Editar_Planetas: TButton
       Left = 40
-      Top = 80
+      Top = 56
       Width = 169
       Height = 65
       Caption = 'Importar / Editar Planetas'
       TabOrder = 0
       OnClick = Btn_Importar_Editar_PlanetasClick
     end
-    object Button1: TButton
+    object Btn_Importar_Editar_Pessoas: TButton
       Left = 40
-      Top = 191
+      Top = 207
       Width = 169
       Height = 65
       Caption = 'Importar / Editar Pessoas'
       TabOrder = 1
-      OnClick = Button1Click
+      OnClick = Btn_Importar_Editar_PessoasClick
     end
+  end
+  object Btn_Cadastrar_Visitas: TButton
+    Left = 335
+    Top = 184
+    Width = 169
+    Height = 65
+    Caption = 'Cadastrar Visitas'
+    TabOrder = 1
+    OnClick = Btn_Cadastrar_VisitasClick
+  end
+  object Btn_Cadastrar_Ranks: TButton
+    Left = 527
+    Top = 264
+    Width = 169
+    Height = 65
+    Caption = 'Rank de Visitas'
+    TabOrder = 2
+    OnClick = Btn_Cadastrar_RanksClick
   end
 end

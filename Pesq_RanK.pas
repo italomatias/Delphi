@@ -1,4 +1,4 @@
-unit Cad_Pessoas;
+unit Pesq_RanK;
 
 interface
 
@@ -8,15 +8,20 @@ uses
   FireDAC.Stan.Option, FireDAC.Stan.Error, FireDAC.UI.Intf, FireDAC.Phys.Intf,
   FireDAC.Stan.Def, FireDAC.Stan.Pool, FireDAC.Stan.Async, FireDAC.Phys,
   FireDAC.Phys.FB, FireDAC.Phys.FBDef, FireDAC.VCLUI.Wait, FireDAC.Stan.Param,
-  FireDAC.DatS, FireDAC.DApt.Intf, FireDAC.DApt, REST.Types,
+  FireDAC.DatS, FireDAC.DApt.Intf, FireDAC.DApt, REST.Types, Datasnap.Provider,
   REST.Response.Adapter, REST.Client, Data.Bind.Components,
   Data.Bind.ObjectScope, Datasnap.DBClient, FireDAC.Comp.DataSet,
   FireDAC.Comp.Client, Vcl.StdCtrls, Vcl.ComCtrls, Vcl.ExtCtrls, Vcl.DBCtrls,
-  Vcl.Grids, Vcl.DBGrids, System.UITypes, Datasnap.Provider, Vcl.Mask ;
+  Vcl.Grids, Vcl.DBGrids, Vcl.Mask;
 
 type
-  TFrmImportaPessoas = class(TFrmCadPadrao)
-    procedure btnImportarClick(Sender: TObject);
+  TFrmPesqRank = class(TFrmCadPadrao)
+    qrypadraoUSUARIO: TStringField;
+    qrypadraoPLANETA: TStringField;
+    qrypadraoVISITAS: TIntegerField;
+    cdspadraoUSUARIO: TStringField;
+    cdspadraoPLANETA: TStringField;
+    cdspadraoVISITAS: TIntegerField;
     procedure FormCreate(Sender: TObject);
   private
     { Private declarations }
@@ -25,27 +30,18 @@ type
   end;
 
 var
-  FrmImportaPessoas: TFrmImportaPessoas;
+  FrmPesqRank: TFrmPesqRank;
 
 implementation
 
 {$R *.dfm}
 
-procedure TFrmImportaPessoas.btnImportarClick(Sender: TObject);
+procedure TFrmPesqRank.FormCreate(Sender: TObject);
 begin
   inherited;
-  if MessageDlg('Deseja importar os dados do web service ?', mtConfirmation, [mbYes, mbNo], 0) = mrYes then
-  begin
-    // Chama função do Pai.
-    Importa_Resgistros('people');
-  end;
-end;
-
-procedure TFrmImportaPessoas.FormCreate(Sender: TObject);
-begin
-  inherited;
-  // Chama função do Pai.
-  Exiberegistros('people');
+  // Busca dados ao abrir a tela.
+  qrypadrao.Open();
+  cdspadrao.Open();
 end;
 
 end.

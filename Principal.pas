@@ -15,9 +15,13 @@ type
   TFrmPrincipal = class(TForm)
     GroupBox1: TGroupBox;
     Btn_Importar_Editar_Planetas: TButton;
-    Button1: TButton;
+    Btn_Importar_Editar_Pessoas: TButton;
+    Btn_Cadastrar_Visitas: TButton;
+    Btn_Cadastrar_Ranks: TButton;
     procedure Btn_Importar_Editar_PlanetasClick(Sender: TObject);
-    procedure Button1Click(Sender: TObject);
+    procedure Btn_Importar_Editar_PessoasClick(Sender: TObject);
+    procedure Btn_Cadastrar_VisitasClick(Sender: TObject);
+    procedure Btn_Cadastrar_RanksClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -29,7 +33,7 @@ var
 
 implementation
 
-Uses Cad_Planetas , Cad_Pessoas ;
+Uses Cad_Planetas , Cad_Pessoas , Cad_Visitas , Pesq_RanK ;
 
 {$R *.dfm}
 
@@ -42,7 +46,25 @@ begin
   frm.Free;
 end;
 
-procedure TFrmPrincipal.Button1Click(Sender: TObject);
+procedure TFrmPrincipal.Btn_Cadastrar_RanksClick(Sender: TObject);
+var
+  frm : TFrmPesqRank;
+begin
+  frm :=   TFrmPesqRank.Create(Self);
+  frm.ShowModal;
+  frm.Free;
+end;
+
+procedure TFrmPrincipal.Btn_Cadastrar_VisitasClick(Sender: TObject);
+var
+  frm : TFrmCadastrarVisitas;
+begin
+  frm :=   TFrmCadastrarVisitas.Create(Self);
+  frm.ShowModal;
+  frm.Free;
+end;
+
+procedure TFrmPrincipal.Btn_Importar_Editar_PessoasClick(Sender: TObject);
 var
   frm : TFrmImportaPessoas;
 begin

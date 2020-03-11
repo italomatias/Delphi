@@ -12,7 +12,7 @@ uses
   REST.Response.Adapter, REST.Client, Data.Bind.Components,
   Data.Bind.ObjectScope, Datasnap.DBClient, FireDAC.Comp.DataSet,
   FireDAC.Comp.Client, Vcl.StdCtrls, Vcl.ComCtrls, Vcl.ExtCtrls, Vcl.DBCtrls,
-  Vcl.Grids, Vcl.DBGrids, System.UITypes, Datasnap.Provider ;
+  Vcl.Grids, Vcl.DBGrids, System.UITypes, Datasnap.Provider, Vcl.Mask ;
 
 type
   TFrmImportaPlanetas = class(TFrmCadPadrao)
@@ -34,7 +34,7 @@ implementation
 procedure TFrmImportaPlanetas.btnImportarClick(Sender: TObject);
 begin
   inherited;
-  if MessageDlg('Deseja importar os dados do Web Service ?', mtConfirmation, [mbYes, mbNo], 0) = mrYes then
+  if MessageDlg('Deseja importar os dados do web service ?', mtConfirmation, [mbYes, mbNo], 0) = mrYes then
   begin
     // Chama função do Pai.
     Importa_Resgistros('planets');

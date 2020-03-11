@@ -116,6 +116,14 @@
             <Form>FrmImportaPessoas</Form>
             <FormType>dfm</FormType>
         </DCCReference>
+        <DCCReference Include="Cad_Visitas.pas">
+            <Form>FrmCadastrarVisitas</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="Pesq_RanK.pas">
+            <Form>FrmPesqRank</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
         <BuildConfiguration Include="Release">
             <Key>Cfg_2</Key>
             <CfgParent>Base</CfgParent>

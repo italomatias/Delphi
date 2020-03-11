@@ -12,7 +12,7 @@ uses
   FireDAC.Comp.DataSet, FireDAC.Comp.Client, Datasnap.DBClient, Vcl.ExtCtrls,
   Vcl.DBCtrls, REST.Types, REST.Response.Adapter, REST.Client,
   Data.Bind.Components, Data.Bind.ObjectScope, Datasnap.Provider, Vcl.StdCtrls,
-  Vcl.ComCtrls, System.UITypes ;
+  Vcl.ComCtrls, System.UITypes, Vcl.Mask ;
 
 type
   TFrmCadPadrao = class(TForm)
@@ -30,7 +30,11 @@ type
     pgbpadrao: TProgressBar;
     btnImportar: TButton;
     dspPadrao: TDataSetProvider;
+    Label1: TLabel;
+    edtpaginacao: TEdit;
     procedure FormCreate(Sender: TObject);
+    procedure edtpaginacaoChange(Sender: TObject);
+    procedure edtpaginacaoKeyPress(Sender: TObject; var Key: Char);
   private
     { Private declarations }
   public
@@ -46,6 +50,13 @@ implementation
 
 {$R *.dfm}
 
+procedure TFrmCadPadrao.edtpaginacaoKeyPress(Sender: TObject; var Key: Char);
+begin
+  // Edt aceita apenas números.
+  if ((key in ['0'..'9'] = false) and (word(key) <> vk_back)) then
+    key := #0;
+end;
+
 procedure TFrmCadPadrao.Exiberegistros(Tabela: String);
 begin
   // Esta função busca os dados da tabela informada por param.
@@ -60,7 +71,7 @@ begin
       cdspadrao.Close;
       cdspadrao.Open;
   except on E: EDatabaseError do
-      MessageDlg('Erro ao Pesquisar dados da base', mtError,  [mbOk], 0);
+      MessageDlg('Erro ao pesquisar dados da base', mtError,  [mbOk], 0);
   end;
 end;
 
@@ -169,9 +180,19 @@ begin
 
     except on E: EDatabaseError do
       // Deu algum problema no SQL :( 
-      MessageDlg('Erro ao Pesquisar dados da base', mtError,  [mbOk], 0);
+      MessageDlg('Erro ao pesquisar dados da base', mtError,  [mbOk], 0);
     end;
 
+end;
+
+procedure TFrmCadPadrao.edtpaginacaoChange(Sender: TObject);
+begin
+  if edtpaginacao.Text <> EmptyStr  then
+  begin
+    cdspadrao.Close;
+    cdspadrao.PacketRecords := strtoint(edtpaginacao.Text);
+    cdspadrao.Open;
+  end;
 end;
 
 end.

@@ -19,6 +19,13 @@ object FrmCadPadrao: TFrmCadPadrao
     575)
   PixelsPerInch = 96
   TextHeight = 13
+  object Label1: TLabel
+    Left = 692
+    Top = 502
+    Width = 53
+    Height = 13
+    Caption = 'Pagina'#231#227'o:'
+  end
   object dbgpadrao: TDBGrid
     Left = -5
     Top = 0
@@ -42,18 +49,16 @@ object FrmCadPadrao: TFrmCadPadrao
     VisibleButtons = [nbFirst, nbPrior, nbNext, nbLast, nbInsert, nbDelete, nbEdit, nbPost, nbCancel, nbRefresh, nbApplyUpdates]
     Align = alBottom
     TabOrder = 1
-    ExplicitWidth = 1006
   end
   object pgbpadrao: TProgressBar
     Left = 192
     Top = 501
-    Width = 680
+    Width = 494
     Height = 17
     Align = alCustom
     Anchors = [akLeft, akTop, akRight, akBottom]
     Max = 50
     TabOrder = 2
-    ExplicitWidth = 806
   end
   object btnImportar: TButton
     Left = 8
@@ -64,9 +69,18 @@ object FrmCadPadrao: TFrmCadPadrao
     Caption = 'Importar'
     TabOrder = 3
   end
+  object edtpaginacao: TEdit
+    Left = 751
+    Top = 499
+    Width = 121
+    Height = 21
+    TabOrder = 4
+    OnChange = edtpaginacaoChange
+    OnKeyPress = edtpaginacaoKeyPress
+  end
   object Conection_Firebird: TFDConnection
     Params.Strings = (
-      'Database=C:\Users\ireis\Desktop\BASE STAR WARS\STARWARS.FDB'
+      'Database=C:\STARWARS.FDB'
       'User_Name=SYSDBA'
       'Password=masterkey'
       'Server=127.0.0.1'

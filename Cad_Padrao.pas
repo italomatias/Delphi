@@ -16,7 +16,6 @@ uses
 
 type
   TFrmCadPadrao = class(TForm)
-    Conection_Firebird: TFDConnection;
     dtspadrao: TDataSource;
     qrypadrao: TFDQuery;
     dbgpadrao: TDBGrid;
@@ -47,6 +46,8 @@ var
   FrmCadPadrao: TFrmCadPadrao;
 
 implementation
+
+Uses Conect ;
 
 {$R *.dfm}
 

@@ -15,9 +15,6 @@ inherited FrmPesqRank: TFrmPesqRank
   inherited btnImportar: TButton
     Visible = False
   end
-  inherited Conection_Firebird: TFDConnection
-    Connected = True
-  end
   inherited qrypadrao: TFDQuery
     SQL.Strings = (
       ''

@@ -14,7 +14,6 @@ uses
 
 type
   TFrmCadastrarVisitas = class(TForm)
-    Conection_Firebird: TFDConnection;
     QryPadrao: TFDQuery;
     dtspadrao: TDataSource;
     dtsplaneta: TDataSource;
@@ -43,6 +42,8 @@ var
   FrmCadastrarVisitas: TFrmCadastrarVisitas;
 
 implementation
+
+Uses Conect ;
 
 {$R *.dfm}
 

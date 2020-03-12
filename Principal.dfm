@@ -39,22 +39,56 @@ object FrmPrincipal: TFrmPrincipal
       OnClick = Btn_Importar_Editar_PessoasClick
     end
   end
-  object Btn_Cadastrar_Visitas: TButton
-    Left = 335
-    Top = 184
-    Width = 169
-    Height = 65
-    Caption = 'Cadastrar Visitas'
+  object GroupBox2: TGroupBox
+    Left = 328
+    Top = 48
+    Width = 249
+    Height = 345
+    Caption = 'Cadastrar e Rank'
     TabOrder = 1
-    OnClick = Btn_Cadastrar_VisitasClick
+    object Btn_Cadastrar_Visitas: TButton
+      Left = 48
+      Top = 56
+      Width = 169
+      Height = 65
+      Caption = 'Cadastrar Visitas'
+      TabOrder = 0
+      OnClick = Btn_Cadastrar_VisitasClick
+    end
+    object Btn_Cadastrar_Ranks: TButton
+      Left = 48
+      Top = 207
+      Width = 169
+      Height = 65
+      Caption = 'Rank de Visitas'
+      TabOrder = 1
+      OnClick = Btn_Cadastrar_RanksClick
+    end
   end
-  object Btn_Cadastrar_Ranks: TButton
-    Left = 527
-    Top = 264
-    Width = 169
-    Height = 65
-    Caption = 'Rank de Visitas'
+  object GroupBox3: TGroupBox
+    Left = 608
+    Top = 48
+    Width = 249
+    Height = 345
+    Caption = 'Listar Visitas e Planetas'
     TabOrder = 2
-    OnClick = Btn_Cadastrar_RanksClick
+    object BtnListarVisitas: TButton
+      Left = 48
+      Top = 56
+      Width = 169
+      Height = 65
+      Caption = 'Listar Visitas'
+      TabOrder = 0
+      OnClick = BtnListarVisitasClick
+    end
+    object BtnListarPlanetas: TButton
+      Left = 48
+      Top = 207
+      Width = 169
+      Height = 65
+      Caption = 'Listar Planetas'
+      TabOrder = 1
+      OnClick = BtnListarPlanetasClick
+    end
   end
 end

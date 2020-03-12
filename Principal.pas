@@ -16,12 +16,18 @@ type
     GroupBox1: TGroupBox;
     Btn_Importar_Editar_Planetas: TButton;
     Btn_Importar_Editar_Pessoas: TButton;
+    GroupBox2: TGroupBox;
     Btn_Cadastrar_Visitas: TButton;
     Btn_Cadastrar_Ranks: TButton;
+    GroupBox3: TGroupBox;
+    BtnListarVisitas: TButton;
+    BtnListarPlanetas: TButton;
     procedure Btn_Importar_Editar_PlanetasClick(Sender: TObject);
     procedure Btn_Importar_Editar_PessoasClick(Sender: TObject);
     procedure Btn_Cadastrar_VisitasClick(Sender: TObject);
     procedure Btn_Cadastrar_RanksClick(Sender: TObject);
+    procedure BtnListarPlanetasClick(Sender: TObject);
+    procedure BtnListarVisitasClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -33,7 +39,7 @@ var
 
 implementation
 
-Uses Cad_Planetas , Cad_Pessoas , Cad_Visitas , Pesq_RanK ;
+Uses Cad_Planetas , Cad_Pessoas , Cad_Visitas , Pesq_RanK , List_Planetas , List_Visitas ;
 
 {$R *.dfm}
 
@@ -42,6 +48,24 @@ var
   frm : TFrmImportaPlanetas;
 begin
   frm :=   TFrmImportaPlanetas.Create(Self);
+  frm.ShowModal;
+  frm.Free;
+end;
+
+procedure TFrmPrincipal.BtnListarPlanetasClick(Sender: TObject);
+var
+  frm : TFrmListPlanetas;
+begin
+  frm :=   TFrmListPlanetas.Create(Self);
+  frm.ShowModal;
+  frm.Free;
+end;
+
+procedure TFrmPrincipal.BtnListarVisitasClick(Sender: TObject);
+var
+  frm : TFRmListarVisitas;
+begin
+  frm :=   TFRmListarVisitas.Create(Self);
   frm.ShowModal;
   frm.Free;
 end;

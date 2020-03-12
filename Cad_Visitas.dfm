@@ -26,7 +26,6 @@ object FrmCadastrarVisitas: TFrmCadastrarVisitas
     VisibleButtons = [nbInsert, nbPost, nbCancel]
     Align = alBottom
     TabOrder = 0
-    ExplicitWidth = 880
   end
   object gpbPlaneta: TGroupBox
     Left = 8
@@ -74,22 +73,10 @@ object FrmCadastrarVisitas: TFrmCadastrarVisitas
       TabOrder = 0
     end
   end
-  object Conection_Firebird: TFDConnection
-    Params.Strings = (
-      'Database=C:\STARWARS.FDB'
-      'User_Name=SYSDBA'
-      'Password=masterkey'
-      'Server=127.0.0.1'
-      'Protocol=TCPIP'
-      'DriverID=FB')
-    Connected = True
-    Left = 680
-    Top = 8
-  end
   object QryPadrao: TFDQuery
     BeforeInsert = QryPadraoBeforeInsert
     AfterPost = QryPadraoAfterPost
-    Connection = Conection_Firebird
+    Connection = FrmConect.Conection_Firebird
     SQL.Strings = (
       ''
       'SELECT ID_PLANET , ID_PEOPLE FROM VISITAS')
@@ -107,7 +94,7 @@ object FrmCadastrarVisitas: TFrmCadastrarVisitas
     Top = 64
   end
   object QryPlaneta: TFDQuery
-    Connection = Conection_Firebird
+    Connection = FrmConect.Conection_Firebird
     SQL.Strings = (
       'SELECT ID , NAME FROM PLANETS')
     Left = 717
@@ -124,7 +111,7 @@ object FrmCadastrarVisitas: TFrmCadastrarVisitas
     end
   end
   object QryUsuario: TFDQuery
-    Connection = Conection_Firebird
+    Connection = FrmConect.Conection_Firebird
     SQL.Strings = (
       ''
       'SELECT ID , NAME FROM PEOPLE')

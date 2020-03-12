@@ -78,24 +78,13 @@ object FrmCadPadrao: TFrmCadPadrao
     OnChange = edtpaginacaoChange
     OnKeyPress = edtpaginacaoKeyPress
   end
-  object Conection_Firebird: TFDConnection
-    Params.Strings = (
-      'Database=C:\STARWARS.FDB'
-      'User_Name=SYSDBA'
-      'Password=masterkey'
-      'Server=127.0.0.1'
-      'Protocol=TCPIP'
-      'DriverID=FB')
-    Left = 656
-    Top = 32
-  end
   object dtspadrao: TDataSource
     DataSet = cdspadrao
     Left = 771
     Top = 32
   end
   object qrypadrao: TFDQuery
-    Connection = Conection_Firebird
+    Connection = FrmConect.Conection_Firebird
     SQL.Strings = (
       '')
     Left = 685
